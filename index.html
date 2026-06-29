@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Educación Híbrida — UNEMI Posgrados</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--navy:#0a1628;
+--navy-mid:#112244;
+--blue:#1a56db;
+--blue-light:#3b82f6;
+--sky:#60a5fa;
+--teal:#0d9488;
+--white:#ffffff;
+--off:#f8fafc;
+--gray-50:#f1f5f9;
+--gray-100:#e2e8f0;
+--gray-300:#94a3b8;
+--gray-500:#64748b;
+--gray-700:#334155;
+--gray-900:#0f172a;
+--gold:#f59e0b;
+--radius-sm:6px;
+--radius:12px;
+--radius-lg:20px;
+--shadow-card:0 1px 3px rgba(0,0,0,.08),0 8px 24px rgba(0,0,0,.06);
+--shadow-hover:0 4px 12px rgba(0,0,0,.10),0 16px 40px rgba(0,0,0,.10);
+--nav-h:68px;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter',sans-serif;color:var(--gray-900);background:var(--white);line-height:1.6;overflow-x:hidden}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--gray-50)}
+::-webkit-scrollbar-thumb{background:var(--blue-light);border-radius:3px}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:100;background:rgba(10,22,40,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;padding:0 40px;gap:32px}
+.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none;flex-shrink:0}
+.nav-logo-box{width:36px;height:36px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.nav-logo-box svg{width:20px;height:20px;fill:white}
+.nav-brand-text{display:flex;flex-direction:column;line-height:1.1}
+.nav-brand-text span:first-child{font-family:'Playfair Display',serif;font-size:14px;color:white;font-weight:700}
+.nav-brand-text span:last-child{font-size:10px;color:rgba(255,255,255,.5);letter-spacing:.5px;text-transform:uppercase}
+.nav-links{display:flex;align-items:center;gap:4px;margin-left:auto}
+.nav-links a{color:rgba(255,255,255,.7);text-decoration:none;font-size:13px;font-weight:500;padding:6px 14px;border-radius:6px;transition:all .2s}
+.nav-links a:hover{color:white;background:rgba(255,255,255,.1)}
+.nav-cta{background:var(--blue) !important;color:white !important;border-radius:8px !important;padding:8px 18px !important}
+.nav-cta:hover{background:#1d4ed8 !important;transform:translateY(-1px)}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.nav-burger span{width:22px;height:2px;background:white;border-radius:2px;transition:all .3s}
+
+/* ── HERO ── */
+.hero{min-height:100vh;background:var(--navy);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:calc(var(--nav-h) + 60px) 24px 80px;position:relative;overflow:hidden}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(59,130,246,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,.06) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+.hero-glow{position:absolute;top:20%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(26,86,219,.25) 0%,transparent 70%);pointer-events:none}
+.hero-glow2{position:absolute;bottom:-10%;right:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(13,148,136,.15) 0%,transparent 70%);pointer-events:none}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.3);border-radius:100px;padding:6px 16px;font-size:12px;color:var(--sky);letter-spacing:.8px;text-transform:uppercase;font-weight:600;margin-bottom:28px;position:relative;z-index:1}
+.hero-eyebrow::before{content:'';width:6px;height:6px;background:var(--sky);border-radius:50%}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,6vw,72px);font-weight:700;color:white;line-height:1.1;max-width:780px;margin-bottom:24px;position:relative;z-index:1}
+.hero h1 em{font-style:italic;color:var(--sky)}
+.hero-sub{font-size:clamp(16px,2vw,19px);color:rgba(255,255,255,.6);max-width:560px;line-height:1.7;margin-bottom:48px;font-weight:300;position:relative;z-index:1}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;position:relative;z-index:1;margin-bottom:80px}
+.btn-primary{background:var(--blue);color:white;padding:14px 32px;border-radius:10px;text-decoration:none;font-size:15px;font-weight:600;transition:all .25s;border:none;cursor:pointer;display:inline-block}
+.btn-primary:hover{background:#1d4ed8;transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,86,219,.4)}
+.btn-outline{background:transparent;color:white;padding:13px 32px;border-radius:10px;text-decoration:none;font-size:15px;font-weight:500;border:1.5px solid rgba(255,255,255,.25);transition:all .25s;display:inline-block}
+.btn-outline:hover{border-color:rgba(255,255,255,.6);background:rgba(255,255,255,.07);transform:translateY(-2px)}
+.hero-stats{display:flex;gap:48px;flex-wrap:wrap;justify-content:center;position:relative;z-index:1}
+.hero-stat{text-align:center}
+.hero-stat strong{display:block;font-family:'Playfair Display',serif;font-size:36px;color:white;font-weight:700;line-height:1}
+.hero-stat span{font-size:13px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.5px;margin-top:4px;display:block}
+.hero-divider{width:1px;height:48px;background:rgba(255,255,255,.15);align-self:center}
+.hero-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,.4);font-size:12px;letter-spacing:.5px;text-transform:uppercase;z-index:1}
+.hero-scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(255,255,255,.3),transparent);animation:scrollpulse 2s ease-in-out infinite}
+@keyframes scrollpulse{0%,100%{opacity:.3;transform:scaleY(.8)}50%{opacity:1;transform:scaleY(1)}}
+
+/* ── SECTION BASE ── */
+.section{padding:96px 24px}
+.section-inner{max-width:1080px;margin:0 auto}
+.section-eyebrow{font-size:12px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--blue);margin-bottom:12px}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,42px);font-weight:700;color:var(--navy);line-height:1.15;margin-bottom:16px}
+.section-sub{font-size:17px;color:var(--gray-500);max-width:580px;line-height:1.7;font-weight:300}
+.section-header{margin-bottom:56px}
+.alt-bg{background:var(--gray-50)}
+.dark-bg{background:var(--navy)}
+
+/* ── ABOUT TEAM ── */
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin-top:48px}
+.team-card{background:white;border:1px solid var(--gray-100);border-radius:var(--radius);padding:32px 24px;text-align:center;box-shadow:var(--shadow-card);transition:all .3s}
+.team-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+.team-avatar{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--teal));margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:22px;color:white;font-weight:700}
+.team-name{font-weight:600;font-size:15px;color:var(--navy);margin-bottom:4px}
+.team-role{font-size:13px;color:var(--gray-500)}
+.team-quote-block{background:var(--navy);border-radius:var(--radius-lg);padding:48px 56px;margin-top:48px;position:relative;overflow:hidden}
+.team-quote-block::before{content:'"';position:absolute;top:-20px;left:24px;font-family:'Playfair Display',serif;font-size:180px;color:rgba(59,130,246,.15);line-height:1;pointer-events:none}
+.team-quote-text{font-family:'Playfair Display',serif;font-size:22px;color:white;line-height:1.5;position:relative;z-index:1;margin-bottom:16px;font-style:italic}
+.team-quote-source{font-size:13px;color:rgba(255,255,255,.45);position:relative;z-index:1}
+
+/* ── WHAT IS ── */
+.what-layout{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.what-text p{font-size:16px;color:var(--gray-500);line-height:1.8;margin-bottom:20px}
+.what-text p strong{color:var(--navy)}
+.what-visual{background:var(--navy);border-radius:var(--radius-lg);padding:40px;position:relative;overflow:hidden}
+.what-visual::after{content:'';position:absolute;bottom:-40px;right:-40px;width:200px;height:200px;background:radial-gradient(circle,rgba(59,130,246,.2),transparent 70%)}
+.model-pill{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:14px 18px;margin-bottom:12px;transition:all .2s}
+.model-pill:hover{background:rgba(255,255,255,.1)}
+.model-pill-icon{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.model-pill-icon.blue{background:rgba(59,130,246,.2)}
+.model-pill-icon.teal{background:rgba(13,148,136,.2)}
+.model-pill-icon.gold{background:rgba(245,158,11,.2)}
+.model-pill-icon svg{width:20px;height:20px}
+.model-pill-text strong{display:block;color:white;font-size:14px;font-weight:600}
+.model-pill-text span{font-size:12px;color:rgba(255,255,255,.45)}
+.model-pct{margin-left:auto;font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--sky)}
+
+/* ── BENEFITS / CHALLENGES ── */
+.bc-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.bc-card{border-radius:var(--radius-lg);padding:40px;position:relative;overflow:hidden}
+.bc-card.green{background:linear-gradient(135deg,#ecfdf5,#d1fae5)}
+.bc-card.amber{background:linear-gradient(135deg,#fffbeb,#fef3c7)}
+.bc-card-header{display:flex;align-items:center;gap:12px;margin-bottom:28px}
+.bc-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.bc-icon.green{background:#10b981}
+.bc-icon.amber{background:#f59e0b}
+.bc-icon svg{width:22px;height:22px;fill:white}
+.bc-card h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--navy)}
+.bc-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.bc-list li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--gray-700);line-height:1.5}
+.bc-list li::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:6px}
+.bc-card.green .bc-list li::before{background:#10b981}
+.bc-card.amber .bc-list li::before{background:#f59e0b}
+
+/* ── TASKS ── */
+.tasks-tabs{display:flex;gap:8px;margin-bottom:40px;background:var(--gray-50);padding:6px;border-radius:12px;width:fit-content}
+.tab-btn{padding:10px 24px;border-radius:8px;border:none;background:transparent;font-size:14px;font-weight:500;color:var(--gray-500);cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif}
+.tab-btn.active{background:white;color:var(--navy);box-shadow:0 1px 4px rgba(0,0,0,.1);font-weight:600}
+.task-panel{display:none}
+.task-panel.active{display:block}
+.task-layout{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.task-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(26,86,219,.1);color:var(--blue);border-radius:100px;padding:5px 14px;font-size:12px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-bottom:20px}
+.task-badge.teal{background:rgba(13,148,136,.1);color:var(--teal)}
+.task-badge.gold{background:rgba(245,158,11,.1);color:#d97706}
+.task-title{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--navy);margin-bottom:16px;line-height:1.2}
+.task-desc{font-size:15px;color:var(--gray-500);line-height:1.8;margin-bottom:28px}
+.task-reflection{background:var(--gray-50);border-left:3px solid var(--blue);border-radius:0 10px 10px 0;padding:20px 24px;margin-top:8px}
+.task-reflection.teal{border-color:var(--teal)}
+.task-reflection.gold{border-color:var(--gold)}
+.task-reflection p{font-size:14px;color:var(--gray-700);line-height:1.7;font-style:italic}
+.task-reflection strong{font-style:normal;display:block;font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--gray-500);margin-bottom:8px}
+.task-media-box{background:var(--navy);border-radius:var(--radius-lg);overflow:hidden;position:relative}
+.task-media-header{padding:20px 24px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:12px}
+.task-media-dots{display:flex;gap:6px}
+.task-media-dots span{width:10px;height:10px;border-radius:50%}
+.task-media-body{padding:32px 24px}
+.task-media-placeholder{height:160px;background:rgba(255,255,255,.04);border:1.5px dashed rgba(255,255,255,.15);border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;margin-bottom:16px}
+.task-media-placeholder svg{width:32px;height:32px;opacity:.3;fill:white}
+.task-media-placeholder span{font-size:13px;color:rgba(255,255,255,.3)}
+.task-meta-row{display:flex;gap:8px;flex-wrap:wrap}
+.task-tag{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:5px 12px;font-size:12px;color:rgba(255,255,255,.5)}
+.embed-btn{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:white;border:none;border-radius:8px;padding:11px 20px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;text-decoration:none;margin-top:16px;transition:all .2s}
+.embed-btn:hover{background:#1d4ed8;transform:translateY(-1px)}
+.embed-btn svg{width:15px;height:15px;fill:white}
+
+/* ── RESOURCES ── */
+.resources-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.res-card{background:white;border:1px solid var(--gray-100);border-radius:var(--radius-lg);padding:32px;box-shadow:var(--shadow-card);transition:all .3s;position:relative;overflow:hidden}
+.res-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.res-card.blue-top::before{background:var(--blue)}
+.res-card.teal-top::before{background:var(--teal)}
+.res-card.gold-top::before{background:var(--gold)}
+.res-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+.res-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+.res-icon.blue{background:rgba(26,86,219,.1)}
+.res-icon.teal{background:rgba(13,148,136,.1)}
+.res-icon.gold{background:rgba(245,158,11,.1)}
+.res-icon svg{width:24px;height:24px}
+.res-card h3{font-weight:700;font-size:16px;color:var(--navy);margin-bottom:8px}
+.res-card p{font-size:14px;color:var(--gray-500);line-height:1.6;margin-bottom:20px}
+.res-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.res-list li{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--gray-700)}
+.res-list li::before{content:'→';color:var(--blue);font-weight:700;flex-shrink:0}
+.res-list a{color:var(--blue);text-decoration:none;font-weight:500}
+.res-list a:hover{text-decoration:underline}
+
+/* ── INFOGRAPHIC ── */
+.infographic{background:var(--navy);border-radius:var(--radius-lg);padding:48px;margin:48px 0;position:relative;overflow:hidden}
+.infographic::before{content:'';position:absolute;top:-60px;right:-60px;width:300px;height:300px;background:radial-gradient(circle,rgba(26,86,219,.2),transparent 70%);pointer-events:none}
+.infographic-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;position:relative;z-index:1}
+.infographic-col{text-align:center}
+.infographic-num{font-family:'Playfair Display',serif;font-size:52px;font-weight:700;color:var(--sky);line-height:1;margin-bottom:8px}
+.infographic-label{font-size:13px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.6px;margin-bottom:16px}
+.infographic-desc{font-size:14px;color:rgba(255,255,255,.7);line-height:1.6}
+.infographic-divider{width:1px;background:rgba(255,255,255,.1);align-self:stretch}
+
+/* ── CONCLUSIONS ── */
+.video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:48px}
+.video-card{background:var(--navy-mid);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-lg);overflow:hidden;transition:all .3s}
+.video-card:hover{transform:translateY(-4px);border-color:rgba(59,130,246,.3)}
+.video-thumb{height:160px;background:linear-gradient(135deg,rgba(26,86,219,.4),rgba(13,148,136,.3));display:flex;align-items:center;justify-content:center;position:relative;cursor:pointer}
+.video-play{width:56px;height:56px;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.video-play:hover{background:var(--blue);border-color:var(--blue);transform:scale(1.1)}
+.video-play svg{width:22px;height:22px;fill:white;margin-left:3px}
+.video-duration{position:absolute;bottom:10px;right:12px;background:rgba(0,0,0,.6);color:white;font-size:11px;padding:3px 8px;border-radius:4px;font-weight:600}
+.video-info{padding:20px 22px}
+.video-name{font-weight:600;font-size:15px;color:white;margin-bottom:4px}
+.video-title-text{font-size:13px;color:rgba(255,255,255,.45)}
+.topics-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.topic-item{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:20px;transition:all .2s}
+.topic-item:hover{background:rgba(255,255,255,.07)}
+.topic-num{font-family:'Playfair Display',serif;font-size:32px;color:var(--sky);font-weight:700;line-height:1;margin-bottom:8px}
+.topic-label{font-size:13px;color:rgba(255,255,255,.5);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;font-size:11px}
+.topic-title{font-size:14px;color:rgba(255,255,255,.8);font-weight:500;line-height:1.4}
+
+/* ── FOOTER ── */
+.footer{background:var(--gray-900);padding:48px 24px 28px}
+.footer-inner{max-width:1080px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.08)}
+.footer-brand p{font-size:14px;color:rgba(255,255,255,.4);line-height:1.7;margin-top:12px;max-width:280px}
+.footer-col h4{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.3);font-weight:600;margin-bottom:16px}
+.footer-col a,.footer-col p{display:block;font-size:14px;color:rgba(255,255,255,.5);text-decoration:none;margin-bottom:8px;transition:color .2s}
+.footer-col a:hover{color:var(--sky)}
+.footer-bottom{padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-bottom p{font-size:13px;color:rgba(255,255,255,.25)}
+.footer-badge{background:rgba(26,86,219,.2);border:1px solid rgba(26,86,219,.3);border-radius:100px;padding:4px 14px;font-size:11px;color:var(--sky);font-weight:600;letter-spacing:.3px}
+
+/* ── MOBILE NAV DRAWER ── */
+.nav-mobile{display:none;position:fixed;inset:0;z-index:200;background:var(--navy)}
+.nav-mobile.open{display:flex;flex-direction:column;padding:var(--nav-h) 32px 48px;gap:8px}
+.nav-mobile a{color:rgba(255,255,255,.8);text-decoration:none;font-size:18px;font-weight:500;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.07);display:block}
+.nav-close{position:absolute;top:20px;right:20px;background:none;border:none;color:white;font-size:24px;cursor:pointer;padding:8px}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .nav{padding:0 20px}
+  .nav-links{display:none}
+  .nav-burger{display:flex}
+  .what-layout,.bc-grid,.task-layout,.topics-grid,.infographic-grid,.footer-top{grid-template-columns:1fr}
+  .hero-stats{gap:24px}
+  .hero-divider{display:none}
+  .tasks-tabs{overflow-x:auto;width:100%;padding:4px}
+  .tab-btn{white-space:nowrap;padding:8px 16px;font-size:13px}
+  .section{padding:64px 20px}
+  .team-quote-block{padding:32px 28px}
+}
+@media(max-width:480px){
+  .hero-actions{flex-direction:column;align-items:center}
+  .btn-primary,.btn-outline{width:100%;text-align:center}
+}
+
+/* ── FADE IN ANIMATION ── */
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-brand" href="#inicio">
+    <div class="nav-logo-box">
+      <svg viewBox="0 0 24 24"><path d="M12 3L2 8l10 5 10-5-10-5zM2 16l10 5 10-5M2 12l10 5 10-5"/></svg>
+    </div>
+    <div class="nav-brand-text">
+      <span>Educación Híbrida</span>
+      <span>UNEMI Posgrados · 2025</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#inicio">Inicio</a>
+    <a href="#sobre">¿Qué es?</a>
+    <a href="#tareas">Tareas</a>
+    <a href="#recursos">Recursos</a>
+    <a href="#conclusiones">Conclusiones</a>
+    <a href="#tareas" class="nav-cta">Ver tareas</a>
+  </div>
+  <div class="nav-burger" onclick="toggleMobileNav()" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="nav-mobile" id="mobileNav">
+  <button class="nav-close" onclick="toggleMobileNav()">✕</button>
+  <a href="#inicio" onclick="toggleMobileNav()">Inicio</a>
+  <a href="#sobre" onclick="toggleMobileNav()">¿Qué es la educación híbrida?</a>
+  <a href="#tareas" onclick="toggleMobileNav()">Tareas del curso</a>
+  <a href="#recursos" onclick="toggleMobileNav()">Recursos complementarios</a>
+  <a href="#conclusiones" onclick="toggleMobileNav()">Conclusiones</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-eyebrow">Maestría en Educación · Módulo Realidades Híbridas</div>
+  <h1>Aprendizaje sin fronteras:<br>la <em>Educación Híbrida</em><br>del futuro</h1>
+  <p class="hero-sub">Un espacio académico que documenta y reflexiona sobre el uso de tecnologías emergentes en la educación superior — aula invertida, realidad aumentada, inteligencia artificial y más.</p>
+  <div class="hero-actions">
+    <a href="#sobre" class="btn-primary">Explorar el sitio</a>
+    <a href="#tareas" class="btn-outline">Ver las tareas</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <strong>3</strong>
+      <span>Tareas integradas</span>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat">
+      <strong>AR + VR</strong>
+      <span>Tecnologías inmersivas</span>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat">
+      <strong>IA</strong>
+      <span>Chatbot educativo</span>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat">
+      <strong>2025</strong>
+      <span>UNEMI · Ecuador</span>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Descubrir</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- EQUIPO -->
+<section class="section" id="equipo">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <p class="section-eyebrow">Quiénes somos</p>
+      <h2 class="section-title">El equipo detrás<br>de este proyecto</h2>
+      <p class="section-sub">Estudiantes de la Maestría en Educación, Mención en Docencia e Investigación en Educación Superior · UNEMI</p>
+    </div>
+    <div class="team-grid fade-in">
+      <div class="team-card">
+        <div class="team-avatar">LJ</div>
+        <div class="team-name">Msc. Luis Javier Castillo H.</div>
+        <div class="team-role">Integrante del grupo</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:linear-gradient(135deg,#0d9488,#1a56db)">I2</div>
+        <div class="team-name">Nombre Integrante 2</div>
+        <div class="team-role">Integrante del grupo</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:linear-gradient(135deg,#7c3aed,#1a56db)">I3</div>
+        <div class="team-name">Nombre Integrante 3</div>
+        <div class="team-role">Integrante del grupo</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:linear-gradient(135deg,#dc2626,#f59e0b)">I4</div>
+        <div class="team-name">Nombre Integrante 4</div>
+        <div class="team-role">Integrante del grupo</div>
+      </div>
+    </div>
+    <div class="team-quote-block fade-in">
+      <p class="team-quote-text">"Integrar lo presencial y lo digital no es una opción educativa; es una responsabilidad pedagógica que el docente del siglo XXI debe asumir con convicción, creatividad y rigor académico."</p>
+      <p class="team-quote-source">— UNESCO, 2022 · Reimagining our futures together: a new social contract for education</p>
+    </div>
+    <div style="margin-top:24px;padding:16px 24px;background:var(--gray-50);border-radius:10px;display:flex;align-items:center;gap:12px;font-size:14px;color:var(--gray-500)" class="fade-in">
+      <svg width="18" height="18" fill="none" stroke="#1a56db" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+      <span><strong style="color:var(--navy)">Módulo:</strong> Realidades Híbridas &nbsp;·&nbsp; <strong style="color:var(--navy)">Docente:</strong> Msig. Jessica Janina Cabezas Quinto &nbsp;·&nbsp; <strong style="color:var(--navy)">Año:</strong> 2025</span>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE EDUCACIÓN HÍBRIDA -->
+<section class="section alt-bg" id="sobre">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <p class="section-eyebrow">Marco conceptual</p>
+      <h2 class="section-title">¿Qué es la<br>Educación Híbrida?</h2>
+      <p class="section-sub">Un modelo pedagógico que integra sistemáticamente la instrucción presencial con el aprendizaje mediado por tecnología digital.</p>
+    </div>
+
+    <div class="what-layout fade-in">
+      <div class="what-text">
+        <p>La educación híbrida —también denominada <strong>blended learning</strong>— es un modelo que combina de forma intencional y estructurada la enseñanza cara a cara con actividades de aprendizaje en línea. No se trata de una simple superposición de modalidades, sino de un <strong>rediseño profundo de la experiencia educativa</strong>.</p>
+        <p>Según Garrison y Kanuka (2004), el modelo híbrido <em>"combina la comunicación oral cara a cara con la comunicación asincrónica mediada por tecnología, de manera coherente y deliberada"</em>. Esto implica repensar roles docentes, entornos y estrategias de evaluación.</p>
+        <p>En educación superior, el modelo híbrido representa una oportunidad para democratizar el acceso al conocimiento, personalizar el aprendizaje y preparar a los estudiantes para entornos laborales cada vez más digitales e interconectados.</p>
+      </div>
+      <div class="what-visual">
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.3);margin-bottom:20px;font-weight:600">Modelos de implementación</p>
+        <div class="model-pill">
+          <div class="model-pill-icon blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <div class="model-pill-text">
+            <strong>Aula Invertida</strong>
+            <span>Contenido en casa · Práctica en clase</span>
+          </div>
+          <span class="model-pct">35%</span>
+        </div>
+        <div class="model-pill">
+          <div class="model-pill-icon teal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#14b8a6" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <div class="model-pill-text">
+            <strong>Rotación por estaciones</strong>
+            <span>Presencial + virtual + colaborativo</span>
+          </div>
+          <span class="model-pct" style="color:#14b8a6">28%</span>
+        </div>
+        <div class="model-pill">
+          <div class="model-pill-icon gold">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div class="model-pill-text">
+            <strong>Flex model</strong>
+            <span>Ritmo personalizado + tutoría presencial</span>
+          </div>
+          <span class="model-pct" style="color:#f59e0b">22%</span>
+        </div>
+        <div class="model-pill">
+          <div class="model-pill-icon" style="background:rgba(139,92,246,.2)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div class="model-pill-text">
+            <strong>Enriquecido en línea</strong>
+            <span>Mayoritariamente virtual con sesiones presenciales</span>
+          </div>
+          <span class="model-pct" style="color:#a78bfa">15%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="infographic fade-in">
+      <div class="infographic-grid">
+        <div class="infographic-col">
+          <div class="infographic-num">73%</div>
+          <div class="infographic-label">Adopción global</div>
+          <div class="infographic-desc">De las instituciones de educación superior incorporan alguna forma de modelo híbrido en sus programas académicos (HolonIQ, 2023).</div>
+        </div>
+        <div class="infographic-divider"></div>
+        <div class="infographic-col">
+          <div class="infographic-num">2.4×</div>
+          <div class="infographic-label">Mayor retención</div>
+          <div class="infographic-desc">Los estudiantes en entornos híbridos bien diseñados retienen hasta 2.4 veces más información que en clases exclusivamente magistrales.</div>
+        </div>
+        <div class="infographic-divider"></div>
+        <div class="infographic-col">
+          <div class="infographic-num">$350B</div>
+          <div class="infographic-label">Mercado EdTech 2025</div>
+          <div class="infographic-desc">El mercado global de tecnología educativa alcanzará 350 mil millones de dólares en 2025, impulsado por el aprendizaje híbrido y la IA.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bc-grid fade-in">
+      <div class="bc-card green">
+        <div class="bc-card-header">
+          <div class="bc-icon green">
+            <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+          </div>
+          <h3>Beneficios del modelo</h3>
+        </div>
+        <ul class="bc-list">
+          <li>Flexibilidad espacio-temporal para el estudiante adulto</li>
+          <li>Personalización del ritmo y estilo de aprendizaje</li>
+          <li>Mayor acceso a recursos digitales de calidad internacional</li>
+          <li>Fomento de la autonomía y la autorregulación del aprendizaje</li>
+          <li>Desarrollo de competencias digitales transversales</li>
+          <li>Reducción de barreras geográficas y económicas de acceso</li>
+          <li>Datos de aprendizaje para decisiones pedagógicas informadas</li>
+          <li>Sostenibilidad ambiental al reducir desplazamientos</li>
+        </ul>
+      </div>
+      <div class="bc-card amber">
+        <div class="bc-card-header">
+          <div class="bc-icon amber">
+            <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <h3>Desafíos a superar</h3>
+        </div>
+        <ul class="bc-list">
+          <li>Brecha digital y acceso desigual a tecnología y conectividad</li>
+          <li>Sobrecarga cognitiva en la gestión de múltiples plataformas</li>
+          <li>Dificultad para mantener la motivación en entornos virtuales</li>
+          <li>Formación docente insuficiente en tecnologías emergentes</li>
+          <li>Diseño de evaluaciones auténticas en contextos mixtos</li>
+          <li>Problemas de conectividad en zonas rurales o periféricas</li>
+          <li>Gestión del tiempo y autodisciplina estudiantil</li>
+          <li>Resistencia institucional al cambio pedagógico y cultural</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TAREAS -->
+<section class="section" id="tareas">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <p class="section-eyebrow">Proyecto aulario</p>
+      <h2 class="section-title">Tareas del curso</h2>
+      <p class="section-sub">Tres proyectos que integran metodologías activas y tecnologías emergentes en el diseño de experiencias de aprendizaje híbrido.</p>
+    </div>
+
+    <div class="tasks-tabs fade-in">
+      <button class="tab-btn active" onclick="showTab('t1',this)">Tarea 1 — Aula Invertida</button>
+      <button class="tab-btn" onclick="showTab('t2',this)">Tarea 2 — AR / VR</button>
+      <button class="tab-btn" onclick="showTab('t3',this)">Tarea 3 — Chatbot</button>
+    </div>
+
+    <!-- TAREA 1 -->
+    <div class="task-panel active fade-in" id="t1">
+      <div class="task-layout">
+        <div>
+          <span class="task-badge">Tarea 1 · Metodología activa</span>
+          <h3 class="task-title">Clase Virtual con Aula Invertida</h3>
+          <p class="task-desc">Diseñamos una clase virtual bajo el modelo de Aula Invertida (<em>Flipped Classroom</em>), en la que los estudiantes acceden previamente a contenidos multimedia —videos, lecturas y recursos digitales— para profundizar y aplicar el conocimiento durante la sesión sincrónica. El modelo permite que el tiempo de clase se destine a actividades de mayor demanda cognitiva: debate, resolución de problemas y co-creación.</p>
+          <div class="task-reflection">
+            <strong>Reflexión pedagógica</strong>
+            <p>El proceso de diseño nos confrontó con la necesidad de repensar el rol del docente: de transmisor de información a diseñador de experiencias de aprendizaje. El verdadero reto del aula invertida no es técnico sino pedagógico — implica confiar en el estudiante como agente activo de su propia formación y estructurar el tiempo sincrónico con intención didáctica clara.</p>
+          </div>
+        </div>
+        <div class="task-media-box">
+          <div class="task-media-header">
+            <div class="task-media-dots">
+              <span style="background:#ef4444"></span>
+              <span style="background:#f59e0b"></span>
+              <span style="background:#10b981"></span>
+            </div>
+            <span style="font-size:12px;color:rgba(255,255,255,.3);margin-left:8px">Presentación de la clase</span>
+          </div>
+          <div class="task-media-body">
+            <div class="task-media-placeholder">
+              <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <span>Video o presentación de la clase virtual</span>
+            </div>
+            <div class="task-meta-row">
+              <span class="task-tag">Aula invertida</span>
+              <span class="task-tag">Flipped Classroom</span>
+              <span class="task-tag">Aprendizaje activo</span>
+            </div>
+            <a href="#" class="embed-btn">
+              <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Ver recurso completo
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAREA 2 -->
+    <div class="task-panel" id="t2">
+      <div class="task-layout">
+        <div>
+          <span class="task-badge teal">Tarea 2 · Tecnología inmersiva</span>
+          <h3 class="task-title">Realidad Aumentada y Realidad Virtual</h3>
+          <p class="task-desc">Desarrollamos un entorno inmersivo utilizando herramientas de Realidad Aumentada (AR) y/o Realidad Virtual (VR), orientado a enriquecer la experiencia de aprendizaje mediante la visualización e interacción con contenidos tridimensionales. Este entorno permite explorar conceptos de manera experiencial, superando las limitaciones del aula física convencional.</p>
+          <div class="task-reflection teal">
+            <strong>Reflexión pedagógica</strong>
+            <p>Las tecnologías inmersivas favorecen el aprendizaje experiencial (Kolb, 1984), especialmente en disciplinas donde la visualización tridimensional o la simulación de contextos reales representa una ventaja pedagógica significativa. La creación del entorno nos permitió comprender que la tecnología es el medio, no el fin — el diseño instruccional debe preceder a la elección tecnológica.</p>
+          </div>
+          <a href="#" class="embed-btn" style="background:var(--teal);margin-top:20px">
+            <svg viewBox="0 0 24 24" fill="white" width="15" height="15"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+            Acceder al entorno AR/VR
+          </a>
+        </div>
+        <div class="task-media-box">
+          <div class="task-media-header">
+            <div class="task-media-dots">
+              <span style="background:#ef4444"></span>
+              <span style="background:#f59e0b"></span>
+              <span style="background:#10b981"></span>
+            </div>
+            <span style="font-size:12px;color:rgba(255,255,255,.3);margin-left:8px">Entorno inmersivo</span>
+          </div>
+          <div class="task-media-body">
+            <div class="task-media-placeholder" style="height:120px">
+              <svg viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+              <span>Captura del entorno AR/VR</span>
+            </div>
+            <div class="task-media-placeholder" style="height:80px;margin-top:8px">
+              <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M8 6V4M16 6V4"/></svg>
+              <span>Captura adicional del entorno</span>
+            </div>
+            <div class="task-meta-row" style="margin-top:12px">
+              <span class="task-tag">Realidad Aumentada</span>
+              <span class="task-tag">VR</span>
+              <span class="task-tag">Inmersivo</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAREA 3 -->
+    <div class="task-panel" id="t3">
+      <div class="task-layout">
+        <div>
+          <span class="task-badge gold">Tarea 3 · Inteligencia Artificial</span>
+          <h3 class="task-title">Chatbot Educativo en POE o Landbot</h3>
+          <p class="task-desc">Diseñamos un chatbot educativo en POE o Landbot destinado a orientar estudiantes, resolver preguntas frecuentes y tutorizar conceptos clave de la asignatura. El chatbot actúa como asistente pedagógico disponible las 24 horas, reduciendo la dependencia de la atención sincrónica del docente y promoviendo la autonomía del estudiante en su proceso de aprendizaje.</p>
+          <div class="task-reflection gold">
+            <strong>Reflexión pedagógica</strong>
+            <p>La creación del chatbot nos confrontó con la necesidad de anticipar las dudas estudiantiles y estructurar el conocimiento en flujos conversacionales lógicos. Comprendimos que la IA conversacional es una extensión del diseño instruccional, no un sustituto del docente — el valor pedagógico reside en la calidad del diseño, no en la tecnología misma.</p>
+          </div>
+          <a href="#" class="embed-btn" style="background:#d97706;margin-top:20px">
+            <svg viewBox="0 0 24 24" fill="white" width="15" height="15"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Probar el chatbot
+          </a>
+        </div>
+        <div class="task-media-box">
+          <div class="task-media-header">
+            <div class="task-media-dots">
+              <span style="background:#ef4444"></span>
+              <span style="background:#f59e0b"></span>
+              <span style="background:#10b981"></span>
+            </div>
+            <span style="font-size:12px;color:rgba(255,255,255,.3);margin-left:8px">Asistente conversacional</span>
+          </div>
+          <div class="task-media-body">
+            <div style="background:rgba(255,255,255,.04);border-radius:10px;padding:16px;margin-bottom:12px">
+              <div style="display:flex;gap:10px;margin-bottom:12px;align-items:flex-start">
+                <div style="width:28px;height:28px;border-radius:50%;background:rgba(245,158,11,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px">🤖</div>
+                <div style="background:rgba(255,255,255,.08);border-radius:0 10px 10px 10px;padding:10px 14px;font-size:13px;color:rgba(255,255,255,.7);line-height:1.5">¡Hola! Soy tu asistente educativo. ¿En qué puedo ayudarte hoy?</div>
+              </div>
+              <div style="display:flex;gap:10px;align-items:flex-start;flex-direction:row-reverse">
+                <div style="width:28px;height:28px;border-radius:50%;background:rgba(26,86,219,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px">👤</div>
+                <div style="background:rgba(26,86,219,.3);border-radius:10px 0 10px 10px;padding:10px 14px;font-size:13px;color:rgba(255,255,255,.8);line-height:1.5">¿Cuáles son los beneficios del aula invertida?</div>
+              </div>
+            </div>
+            <div style="background:rgba(255,255,255,.03);border-radius:8px;padding:12px;text-align:center">
+              <p style="font-size:12px;color:rgba(255,255,255,.3);margin-bottom:8px">Escanea para acceder al chatbot</p>
+              <div style="width:80px;height:80px;background:rgba(255,255,255,.1);border-radius:8px;margin:0 auto;display:flex;align-items:center;justify-content:center">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h.01M17 14h.01M14 17h.01M17 17h.01M20 14h.01M20 17h.01M20 20h.01M17 20h.01M14 20h.01"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECURSOS -->
+<section class="section alt-bg" id="recursos">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <p class="section-eyebrow">Recursos complementarios</p>
+      <h2 class="section-title">Herramientas, tutoriales<br>y referencias</h2>
+      <p class="section-sub">Una selección curada de recursos para profundizar en el diseño de clases híbridas, tecnologías inmersivas y asistentes conversacionales.</p>
+    </div>
+
+    <div class="resources-grid fade-in">
+      <div class="res-card blue-top">
+        <div class="res-icon blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1a56db" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <h3>Herramientas para clases híbridas</h3>
+        <p>Plataformas y aplicaciones para diseñar, gestionar y enriquecer experiencias de aprendizaje híbrido.</p>
+        <ul class="res-list">
+          <li><a href="https://moodle.org" target="_blank">Moodle — LMS para gestión de cursos</a></li>
+          <li><a href="https://nearpod.com" target="_blank">Nearpod — presentaciones interactivas</a></li>
+          <li><a href="https://padlet.com" target="_blank">Padlet — tablero colaborativo en línea</a></li>
+          <li><a href="https://mentimeter.com" target="_blank">Mentimeter — encuestas en tiempo real</a></li>
+          <li><a href="https://classroom.google.com" target="_blank">Google Classroom — aula virtual</a></li>
+          <li><a href="https://wakelet.com" target="_blank">Wakelet — curaduría de contenidos</a></li>
+        </ul>
+      </div>
+
+      <div class="res-card teal-top">
+        <div class="res-icon teal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="1.8"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        </div>
+        <h3>Tutoriales recomendados</h3>
+        <p>Guías paso a paso para trabajar con las tecnologías del módulo Realidades Híbridas.</p>
+        <ul class="res-list">
+          <li><a href="https://cospaces.io" target="_blank">Crear entornos VR en CoSpaces Edu</a></li>
+          <li><a href="https://assemblrworld.com" target="_blank">Realidad aumentada con Assemblr Edu</a></li>
+          <li><a href="https://landbot.io" target="_blank">Diseño de chatbots en Landbot</a></li>
+          <li><a href="https://poe.com" target="_blank">Creación de bots en POE by Quora</a></li>
+          <li><a href="https://www.canva.com/websites" target="_blank">Canva Websites paso a paso</a></li>
+          <li><a href="https://lumen5.com" target="_blank">Videos educativos con Lumen5 + IA</a></li>
+        </ul>
+      </div>
+
+      <div class="res-card gold-top">
+        <div class="res-icon gold">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <h3>Presentación interactiva</h3>
+        <p>Presentación elaborada por el grupo sobre el panorama actual de la educación híbrida.</p>
+        <ul class="res-list">
+          <li>Tendencias globales EdTech 2025</li>
+          <li>Modelos de implementación documentados</li>
+          <li>Casos de éxito en universidades latinoamericanas</li>
+          <li>IA aplicada a la personalización del aprendizaje</li>
+          <li>Bibliografía académica actualizada</li>
+        </ul>
+        <a href="#" class="embed-btn" style="background:var(--gold);margin-top:20px;width:100%;justify-content:center">
+          <svg viewBox="0 0 24 24" fill="white" width="15" height="15"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline fill="none" stroke="white" stroke-width="2" points="15 3 21 3 21 9"/><line stroke="white" stroke-width="2" x1="10" y1="14" x2="21" y2="3"/></svg>
+          Ver presentación completa
+        </a>
+      </div>
+    </div>
+
+    <div style="margin-top:48px;background:white;border:1px solid var(--gray-100);border-radius:var(--radius-lg);padding:40px;box-shadow:var(--shadow-card)" class="fade-in">
+      <p class="section-eyebrow" style="margin-bottom:16px">Bibliografía académica</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div style="font-size:14px;color:var(--gray-700);padding:12px 16px;background:var(--gray-50);border-radius:8px;line-height:1.6">Garrison, D. R., & Kanuka, H. (2004). Blended learning: Uncovering its transformative potential in higher education. <em style="color:var(--gray-500)">Internet and Higher Education, 7(2)</em>, 95–105.</div>
+        <div style="font-size:14px;color:var(--gray-700);padding:12px 16px;background:var(--gray-50);border-radius:8px;line-height:1.6">UNESCO (2022). <em style="color:var(--gray-500)">Reimagining our futures together: a new social contract for education.</em> International Commission on the Futures of Education.</div>
+        <div style="font-size:14px;color:var(--gray-700);padding:12px 16px;background:var(--gray-50);border-radius:8px;line-height:1.6">Kolb, D. A. (1984). <em style="color:var(--gray-500)">Experiential learning: Experience as the source of learning and development.</em> Prentice Hall.</div>
+        <div style="font-size:14px;color:var(--gray-700);padding:12px 16px;background:var(--gray-50);border-radius:8px;line-height:1.6">HolonIQ (2023). <em style="color:var(--gray-500)">Global EdTech Market Outlook 2023–2025.</em> Education Intelligence. holoniq.com</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONCLUSIONES -->
+<section class="section dark-bg" id="conclusiones">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <p class="section-eyebrow" style="color:var(--sky)">Reflexión final</p>
+      <h2 class="section-title" style="color:white">Conclusiones y<br>reflexión individual</h2>
+      <p class="section-sub" style="color:rgba(255,255,255,.5)">Cada integrante del grupo comparte su reflexión personal sobre los aprendizajes del módulo, el impacto de la educación híbrida y el rol de la inteligencia artificial en la educación.</p>
+    </div>
+
+    <div class="video-grid fade-in">
+      <div class="video-card">
+        <div class="video-thumb">
+          <div class="video-play">
+            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <span class="video-duration">≤ 3:00</span>
+        </div>
+        <div class="video-info">
+          <div class="video-name">Msc. Luis Javier Castillo H.</div>
+          <div class="video-title-text">Reflexión sobre educación híbrida e IA</div>
+        </div>
+      </div>
+      <div class="video-card">
+        <div class="video-thumb" style="background:linear-gradient(135deg,rgba(13,148,136,.4),rgba(26,86,219,.3))">
+          <div class="video-play">
+            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <span class="video-duration">≤ 3:00</span>
+        </div>
+        <div class="video-info">
+          <div class="video-name">Nombre Integrante 2</div>
+          <div class="video-title-text">Reflexión sobre educación híbrida e IA</div>
+        </div>
+      </div>
+      <div class="video-card">
+        <div class="video-thumb" style="background:linear-gradient(135deg,rgba(124,58,237,.4),rgba(13,148,136,.3))">
+          <div class="video-play">
+            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <span class="video-duration">≤ 3:00</span>
+        </div>
+        <div class="video-info">
+          <div class="video-name">Nombre Integrante 3</div>
+          <div class="video-title-text">Reflexión sobre educación híbrida e IA</div>
+        </div>
+      </div>
+      <div class="video-card">
+        <div class="video-thumb" style="background:linear-gradient(135deg,rgba(220,38,38,.3),rgba(245,158,11,.3))">
+          <div class="video-play">
+            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <span class="video-duration">≤ 3:00</span>
+        </div>
+        <div class="video-info">
+          <div class="video-name">Nombre Integrante 4</div>
+          <div class="video-title-text">Reflexión sobre educación híbrida e IA</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="topics-grid fade-in" style="margin-top:48px">
+      <div class="topic-item">
+        <div class="topic-num">01</div>
+        <div class="topic-label">Eje reflexivo</div>
+        <div class="topic-title">Reflexión sobre los aprendizajes adquiridos en el módulo</div>
+      </div>
+      <div class="topic-item">
+        <div class="topic-num">02</div>
+        <div class="topic-label">Eje reflexivo</div>
+        <div class="topic-title">Impacto de la educación híbrida en el futuro de la docencia</div>
+      </div>
+      <div class="topic-item">
+        <div class="topic-num">03</div>
+        <div class="topic-label">Eje reflexivo</div>
+        <div class="topic-title">Impacto de la inteligencia artificial en la educación superior</div>
+      </div>
+    </div>
+
+    <div style="margin-top:56px;text-align:center;padding:40px 24px;border-top:1px solid rgba(255,255,255,.08)" class="fade-in">
+      <p style="font-family:'Playfair Display',serif;font-size:clamp(18px,3vw,26px);color:white;font-style:italic;max-width:640px;margin:0 auto 16px;line-height:1.5">"La tecnología no transforma la educación. La transforma el docente que sabe usarla con propósito pedagógico."</p>
+      <p style="font-size:13px;color:rgba(255,255,255,.35)">Grupo de investigación · Maestría en Educación · UNEMI · 2025</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+          <div class="nav-logo-box">
+            <svg viewBox="0 0 24 24" fill="white"><path d="M12 3L2 8l10 5 10-5-10-5zM2 16l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <span style="font-family:'Playfair Display',serif;font-size:16px;color:white;font-weight:700">Educación Híbrida</span>
+        </div>
+        <p>Proyecto Aulario · Maestría en Educación, Mención en Docencia e Investigación en Educación Superior. Universidad Estatal de Milagro — UNEMI Posgrados.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <a href="#inicio">Inicio</a>
+        <a href="#sobre">¿Qué es?</a>
+        <a href="#tareas">Tareas</a>
+        <a href="#recursos">Recursos</a>
+        <a href="#conclusiones">Conclusiones</a>
+      </div>
+      <div class="footer-col">
+        <h4>Información</h4>
+        <p>Módulo: Realidades Híbridas</p>
+        <p>Docente: Msig. Jessica Janina Cabezas Quinto</p>
+        <p>UNEMI Posgrados · 2025</p>
+        <p>Ecuador</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Grupo Maestría en Educación · UNEMI · Todos los derechos reservados</p>
+      <span class="footer-badge">Proyecto Aulario · 30 pts</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMobileNav(){
+  var n=document.getElementById('mobileNav');
+  n.classList.toggle('open');
+  document.body.style.overflow=n.classList.contains('open')?'hidden':'';
+}
+function showTab(id,btn){
+  document.querySelectorAll('.task-panel').forEach(function(p){p.classList.remove('active')});
+  document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active')});
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+var observer=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible')}});
+},{threshold:0.12});
+document.querySelectorAll('.fade-in').forEach(function(el){observer.observe(el)});
+</script>
+</body>
+</html>
